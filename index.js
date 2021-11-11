@@ -11,18 +11,20 @@ document.getElemntById("submit-form").addEventListener("click",submitForm);
 	stopBtn.addEventListener("click",clearInterval(intervalId));
 }*/
 
-function sendData(roomNum,StudentID){
+function sendData(room,id){
 	console.log("attempting to send data...");
 	if (running == true){
-		axios.post('https://sheetdb.io/api/v1/a2p84tz3nd0mb?sheet='+roomNum,
-				  {"data":{"studentID":studentID}
+		axios.post('https://sheetdb.io/api/v1/a2p84tz3nd0mb?sheet='+room,
+				  {"data":{"studentID":id}
 		  }).then(response => {
-		console.log("data sent!");
+			console.log("data sent!{"+id+","+room+"}");
+			innerHTML += "data sent!{"+id+","+room+"}";
 			console.log(response);
 		})
 	}
 	else{
 		console.log("no data to send. failure");
+		innerHTML += "no data to send. failure";
 	}
 }
 function submitForm(){
@@ -32,6 +34,7 @@ function submitForm(){
 	if (studentID != null && roomNum != null){
 		running = true;
 		console.log("form submitted!");
+		innerHTML += "form submitted!";
 		sendData(roomNum,studentID);
 		//createStopBtn();
 		window.setInterval(sendData,60000,roomNum,studentID); 
