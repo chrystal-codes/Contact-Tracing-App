@@ -18,13 +18,13 @@ function sendData(room,id){
 				  {"data":{"studentID":id}
 		  }).then(response => {
 			console.log("data sent!{"+id+","+room+"}");
-			innerHTML += "data sent!{"+id+","+room+"}";
+			document.body.innerHTML += "data sent!{"+id+","+room+"}";
 			console.log(response);
 		})
 	}
 	else{
 		console.log("no data to send. failure");
-		innerHTML += "no data to send. failure";
+		document.body.innerHTML += "no data to send. failure";
 	}
 }
 function submitForm(){
@@ -34,13 +34,14 @@ function submitForm(){
 	if (studentID != null && roomNum != null){
 		running = true;
 		console.log("form submitted!");
-		innerHTML += "form submitted!";
+		document.body.innerHTML += "form submitted!";
 		sendData(roomNum,studentID);
 		//createStopBtn();
 		window.setInterval(sendData,60000,roomNum,studentID); 
 	}
 	else {
 		console.log("data could not be sent");
+		document.body.innerHTML += "data could not be sent";
 	}
 
 	 
