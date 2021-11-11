@@ -1,6 +1,7 @@
 var intervalID;
 var running = false;
 console.log(running);
+document.body.innerHTML += running;
 
 document.getElemntById("submit-form").addEventListener("click",submitForm);
 
