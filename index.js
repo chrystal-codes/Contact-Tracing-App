@@ -15,7 +15,7 @@ document.getElemntById("submit-form").addEventListener("click",submitForm);
 function sendData(room,id){
 	console.log("attempting to send data...");
 	if (running == true){
-		axios.post('https://sheetdb.io/api/v1/a2p84tz3nd0mb?sheet='+room,
+		axios.post('https://sheetdb.io/api/v1/a2p84tz3nd0mb',
 				  {"data":{"studentID":id}
 		  }).then(response => {
 			console.log("data sent!{"+id+","+room+"}");
