@@ -1,23 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 	<body>
-		<h1>Contact Tracing Web Application</h1>
-		<h4>by Christabel Segun</h3>
-		</hr>
-		<h3>How to Use</h3>
-		<p>In order to use this application, enter your student ID and the numbe rof the room you are currently in. 
-			Then, click on the submit button and keep your chromebook open, 
-			in order for the website to collect your location data and keep you safe! :)</p>
-		</hr>
-		
-		<form autocomplete="on" id="sheetdb-form">
+		<form autocomplet="on" id="sheetdb-form">
 		  STUDENT ID <input type="number" minlength="6" maxlength="6" id="student_id"></br>
 		  ROOM NUMBER <input type="number" min="1000" max="3100" id="room_number"></br>
 		  <button type="button" id="submit-form">SUBMIT</button>
 		</form> 
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-		<script src="index.js"></script> 
+		<script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+		<script>
+		  var studentID;
+		  var roomNum;
+		  var loc;
+		  var running = false;
+
+		  function success(){
+			  long = position.coords.longitude;
+			  lat = position.coords.latitude;
+
+			  return [long,lat]
+		  }
+		  function error(){
+			  console.log("Geolocation not supported in this browser");
+		  } 
+
+		  function sendData(id,room){
+			if(id != null && room != null){
+				axios.post('https://sheetdb.io/api/v1/a2p84tz3nd0mb?sheet=sheet1',
+						  {"data":{"studentID":id,"room":room/*,"longitude":loc[0],"latitude":loc[1]*/}
+				  }).then(response => {
+					console.log("data sent!");
+					console.log(response);
+				  })
+			}
+		  }
+		  function submitForm(){
+			running = true;
+
+		    studentID = document.getElementById("student_id").value;
+		    roomNum = document.getElementById("room_number").value;
+			loc = navigator.geolocation.getCurrentPosition(success,error);
+
+			sendData(studentID,roomNum);
+		    console.log("success!");
+		  }
+		  function clickBtn(){
+			if(studentID.length == 6 && roomNum >= 1000 && roomNum <= 3100){
+				document.getElementById("submit-form").click();	
+			}	
+		  }
+
+		  document.getElementById("submit-form").addEventListener("click",submitForm);
+		  setInterval(clickBtn,120000);
+
+		</script> 
 		
 	</body>
 </html>
