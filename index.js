@@ -1,5 +1,6 @@
 var intervalID;
 var running = false;
+var roomNum;
 console.log(running);
 
 document.getElemntById("submit-form").addEventListener("click",submitForm);
