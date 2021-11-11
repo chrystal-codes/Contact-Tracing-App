@@ -4,12 +4,12 @@ console.log(running);
 
 document.getElemntById("submit-form").addEventListener("click",submitForm);
 
-function createStopBtn(){
+/*function createStopBtn(){
 	var stopBtn = document.createElement("button");
 	stopBtn.innerText = "STOP";
 	document.getElementById("sheetdb-form").appendChild(stopBtn);
 	stopBtn.addEventListener("click",clearInterval(intervalId));
-}
+}*/
 
 function sendData(){
 	console.log("attempting to send data...");
@@ -33,8 +33,8 @@ function submitForm(){
 		running = true;
 		console.log("form submitted!");
 		sendData();
-		createStopBtn();
-		intervalId = window.setInterval(sendData,60000); 
+		//createStopBtn();
+		window.setInterval(sendData,60000); 
 	}
 	else {
 		console.log("data could not be sent");
