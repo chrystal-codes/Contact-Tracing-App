@@ -29,6 +29,8 @@ function sendData(room,id){
 	}
 }
 function submitForm(){
+	document.body.innerHTML += "clicked to submit form";
+	
 	var studentID = document.getElementById("student_id").value;
 	var roomNum = document.getElementById("room_number").value;
 
