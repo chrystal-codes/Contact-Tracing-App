@@ -28,7 +28,7 @@
 			  longitude = position.coords.longitude;
 			  latitude = position.coords.latitude;
 
-			  sendData(studentID,roomNum,1000,1500);
+			  //sendData(studentID,roomNum,1000,1500);
 		  }
 		  function error(){
 			  console.log("Geolocation not supported in this browser");
@@ -51,7 +51,7 @@
 		    roomNum = document.getElementById("room_number").value;
 		    navigator.geolocation.getCurrentPosition(success,error);
 
-			//sendData(studentID,roomNum);
+		    sendData(studentID,roomNum,longitude,latitude);
 		    console.log("success!");
 		  }
 		  function clickBtn(){
